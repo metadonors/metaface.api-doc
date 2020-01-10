@@ -18,6 +18,7 @@ Main signup components are:
     - Donor Address Data
 - Donation Data
 - Payment Data
+- Reject Data
 
 ### Signup Metadata
 
@@ -42,17 +43,30 @@ about all business related information that can be useful to manage and analyze 
 | updated          |  Date   |  False   |                    Last update Date                    |
 | error_log        |  List   |  False   |            List of current errors in singup            |
 | checkpoint_date  |  Date   |  False   |               Date of signup validation                |
+| signature        | String  |  False   |      Base64 representation of the donor signature      |
+| donor            | Object  |   True   |            Donor data (see Donor structure)            |
+| donation         | Object  |   True   |          Donor data (see Donation structure)           |
+| payment          | Object  |   True   |           Donor data (see Payment structure)           |
 
 ### Donor data
 
-Metadata represent information about where signup was collected, by who, in which team and in general
-about all business related information that can be useful to manage and analyze signups.
+Donor data contains information about the donor who made the signup. In this section you will find
+personal and contacts data.
 
 #### Structure
 
-| Field            |  Type   | Required |                      Description                       |
-| ---------------- | :-----: | :------: | :----------------------------------------------------: |
-| id               | Integer |   True   |                       Signup ID                        |
+| Field         |  Type  | Required |              Description               |
+| ------------- | :----: | :------: | :------------------------------------: |
+| business_name | String |  False   |   Business name in case of companies   |
+| first_name    | String |  False   |            Donor first name            |
+| last_name     | String |  False   |            Donor last name             |
+| sex           | String |  False   |              Donor gender              |
+| pob           | String |  False   |          Donor place of birth          |
+| dob           | String |  False   |          Donor date of birth           |
+| job           | String |  False   |               Donor job                |
+| ssn           | String |  False   |       Donor Social Serial Number       |
+| vat           | String |  False   |               Donor VAT                |
+| Contacts      | Object |  False   | Donor Contacts (see contact structure) |
 
 ### Donor Contacts data
 
@@ -61,32 +75,46 @@ about all business related information that can be useful to manage and analyze 
 
 #### Structure
 
-| Field            |  Type   | Required |                      Description                       |
-| ---------------- | :-----: | :------: | :----------------------------------------------------: |
-| id               | Integer |   True   |                       Signup ID                        |
+| Field               |  Type  | Required |             Description             |
+| ------------------- | :----: | :------: | :---------------------------------: |
+| phone               | String |  False   |         Donor phone number          |
+| mobile              | String |  False   |      Donor mobile phone number      |
+| email               | String |  False   |         Donor email address         |
+| privacy             | String |  False   |    Donor general privacy consent    |
+| sms_privacy         | String |  False   |      Donor SMS privacy consent      |
+| phone_privacy       | String |  False   | Donor Telemarketing privacy consent |
+| mail_privacy        | String |  False   |     Donor Mail privacy consent      |
+| paper_privacy       | String |  False   |    Donor Postal privacy consent     |
+| profilation_privacy | String |  False   |  Donor Profilation privacy consent  |
+| address             | Object |  False   |  Donor postal address information   |
 
-### Donation Contacts data
+### Donation data
 
-Metadata represent information about where signup was collected, by who, in which team and in general
-about all business related information that can be useful to manage and analyze signups.
-
-#### Structure
-
-| Field            |  Type   | Required |                      Description                       |
-| ---------------- | :-----: | :------: | :----------------------------------------------------: |
-| id               | Integer |   True   |                       Signup ID                        |
-
-### Payment Contacts data
-
-Metadata represent information about where signup was collected, by who, in which team and in general
-about all business related information that can be useful to manage and analyze signups.
+Donation data represent information about the type and amount of the donation that donor signed up
 
 #### Structure
 
-| Field            |  Type   | Required |                      Description                       |
-| ---------------- | :-----: | :------: | :----------------------------------------------------: |
-| id               | Integer |   True   |                       Signup ID                        |
+| Field         |  Type   | Required |          Description          |
+| ------------- | :-----: | :------: | :---------------------------: |
+| frequency     | Integer |   True   |   Frequency of the donation   |
+| amount        |  Float  |   True   |    Amount of the donation     |
+| mandate_date  |  Date   |   True   |   Date of signup signature    |
+| first_payment |  Date   |   True   |     Date of first payment     |
+| destination   | Integer |   True   |  ID of donation destination   |
+| topic         | Integer |   True   | ID of donor favorite argument |
 
+### Payment Method data
+
+Signup payment data
+
+#### Structure
+
+| Field       |  Type  | Required |                     Description                     |
+| ----------- | :----: | :------: | :-------------------------------------------------: |
+| method      | string |   True   |           Type of payment method choosed            |
+| creditcard  | Object |  False   |  CreditCard Information (see CreditCard structure)  |
+| directdebit | Object |  False   | DirectDebit Information (see DirectDebit structure) |
+| bankwire    | Object |  False   |         SDD Information (see SDD structure)         |
 
 ## Read Signups
 

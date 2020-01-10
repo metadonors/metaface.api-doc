@@ -3,38 +3,76 @@ id: workedshifts
 title: Worked Shifts
 ---
 
-Tracking code use to trace your signup campaigns
+Worked Shift are used to track work time of fundraiser
 
-## Read tracking codes list
+## Read worked shift list
 
-### GET /trackings
+### GET /workedshift
 
-Read the list of available tracking codes
+Read the list of workedshift for a fundraiser
 
 #### Response structure
 
-| Field      |  Type   | Required |       Description        |
-| ---------- | :-----: | :------: | :----------------------: |
-| id         | Integer |   True   |       Tracking ID        |
-| code       | String  |   True   |      Tracking Code       |
-| is_active  | Boolean |  False   |     Tracking enabled     |
-| is_default | Boolean |  False   | Is default Tracking Code |
+| Field |  Type   | Required |  Description   |
+| ----- | :-----: | :------: | :------------: |
+| id    | Integer |   True   | Workedshift ID |
 
 Example response
 
 ```json
-[
-   {
-    "id": 1,
-    "code": "19XXXXXX1",
-    "is_active": true,
-    "is_default": false
-  },
-  {
-    "id": 2,
-    "code": "20XXXXX1",
-    "is_active": true,
-    "is_default": true
-  }
-]
+
+```
+
+## Crate worked shift
+
+### POST /workedshift
+
+Create a workedshift for a fundraiser
+
+#### Response structure
+
+| Field |  Type   | Required |  Description   |
+| ----- | :-----: | :------: | :------------: |
+| id    | Integer |   True   | Workedshift ID |
+
+Example response
+
+```json
+
+```
+
+## Edit worked shift list
+
+### PUT /workedshift/:id
+
+Edit a workedshift for a fundraiser
+
+#### Response structure
+
+| Field |  Type   | Required |  Description   |
+| ----- | :-----: | :------: | :------------: |
+| id    | Integer |   True   | Workedshift ID |
+
+Example response
+
+```json
+
+```
+
+## Delete worked shift list
+
+### DELETE /workedshift/:id
+
+Delete workedshift for a fundraiser
+
+#### Response structure
+
+| Field |  Type   | Required |  Description   |
+| ----- | :-----: | :------: | :------------: |
+| id    | Integer |   True   | Workedshift ID |
+
+Example response
+
+```json
+
 ```
