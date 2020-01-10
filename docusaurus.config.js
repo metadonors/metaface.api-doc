@@ -1,8 +1,8 @@
 module.exports = {
   title: 'Metaface API',
   tagline: 'Access your Face2Face platform APIs',
-  url: 'https://api.metaface.io',
-  baseUrl: '/',
+  url: 'https://metadonors.github.com',
+  baseUrl: '/metaface.api-doc',
   favicon: 'img/favicon.png',
   organizationName: 'metadonors',
   projectName: 'metaface.api-doc',
