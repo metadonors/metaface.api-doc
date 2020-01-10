@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Metaface API',
   tagline: 'Access your Face2Face platform APIs',
-  url: 'https://api.metaface.io',
+  url: 'https://stupefied-meitner-bdd174.netlify.com/',
   baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'metadonors',
