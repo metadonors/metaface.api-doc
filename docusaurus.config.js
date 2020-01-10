@@ -1,8 +1,8 @@
 module.exports = {
   title: 'Metaface API',
   tagline: 'Access your Face2Face platform APIs',
-  url: 'https://metadonors.github.com',
-  baseUrl: '/metaface.api-doc',
+  url: 'https://api.metaface.io',
+  baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'metadonors',
   projectName: 'metaface.api-doc',
@@ -24,12 +24,12 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/doc1',
+              label: 'Getting Started',
+              to: 'docs/overview',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2',
+              label: 'Reference',
+              to: 'docs/signups',
             },
           ],
         },
@@ -56,7 +56,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Metadonors.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Metadonors`,
     },
   },
   presets: [

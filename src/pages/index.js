@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Connect your fundraising ecosystem</>,
+    imageUrl: 'img/undraw_online_transactions_02ka.svg',
     description: (
       <>
         Connect your call center, donor database or marketing automation system in a quick and easy way.
@@ -17,6 +18,7 @@ const features = [
   },
   {
     title: <>Collect donations in real-time</>,
+    imageUrl: 'img/undraw_subscriptions_1xdv.svg',
     description: (
       <>
         Cut down attrition transacting the first donation directly.
@@ -25,6 +27,8 @@ const features = [
   },
   {
     title: <>Manage your Fundraisers</>,
+    imageUrl: 'img/undraw_team_spirit_hrr4.svg',
+
     description: (
       <>
         Manage your in – house or agency – hired fundraising team with a single tool.

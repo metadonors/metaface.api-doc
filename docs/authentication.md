@@ -30,6 +30,12 @@ Example request body
 }
 ```
 
+##### Response structure
+
+| Field         | Type          |   Required  | Description      |
+| ------------- | :-----------: | :---------: | :---------------:|
+| token         | String        | True        | A valid token |
+
 Example response
 ```json
 {

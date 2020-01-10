@@ -8,6 +8,6 @@
 module.exports = {
   someSidebar: {
     Introduction: ['overview', 'authentication'],
-    Reference: ['projects', 'signups', 'teams', 'locations', 'trackings', 'workedshifts'],
+    Reference: ['signups', 'teams', 'locations', 'trackings', 'workedshifts'],
   },
 };
