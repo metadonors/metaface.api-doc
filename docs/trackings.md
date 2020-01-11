@@ -20,6 +20,14 @@ Read the list of available tracking codes
 | is_active  | Boolean |  False   |     Tracking enabled     |
 | is_default | Boolean |  False   | Is default Tracking Code |
 
+Example request
+
+```bash
+curl --request GET \
+  --url https://<cs>.metaface.it/api/v3/trackings \
+  --header 'Authorization: Token <secret_api_key>'
+```
+
 Example response
 
 ```json

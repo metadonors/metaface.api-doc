@@ -22,6 +22,14 @@ Read the list of available locations
 | phone   | String  |  False   |  Location Phone  |
 | email   | String  |  False   |  Location Email  |
 
+Example request
+
+```bash
+curl --request GET \
+  --url https://<cs>.metaface.it:8000/api/v3/locations/ \
+  --header 'Authorization: Token <secret_api_key>'
+```
+
 Example response
 
 ```json
