@@ -39,7 +39,7 @@ Example request body
 Example response
 ```json
 {
-   "token": "123456789012345678901234567890XXXXXXXX"
+   "token": "<secret_api_key>"
 }
 ```
 
@@ -48,14 +48,14 @@ Example response
 Once you obtain your token you are able to make requests to Metaface API. A valid
 token should be passed in a dedicated Header in HTTP request with the following format
 
-> Authorization: Token 123456789012345678901234567890XXXXXXXX
+> Authorization: Token <secret_api_key>
 
 As an example, this is a request that fetchs all user teams with [curl](http://curl.haxx.se/):
 
 ```bash
 curl --request GET \
 --url 'https://<cs>.metaface.it/v3/teams' \
--H 'Authorization: Token 123456789012345678901234567890XXXXXXXX'
+-H 'Authorization: Token <secret_api_key>'
 ```
 
 Where _cs_ is your customer subdomain
