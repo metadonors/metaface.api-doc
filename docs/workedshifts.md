@@ -11,6 +11,12 @@ Worked Shift are used to track work time of fundraiser
 
 Read the list of workedshift for a fundraiser
 
+#### Parameters
+
+| Field |  Type   | Required |  Description   |
+| ----- | :-----: | :------: | :------------: |
+| id    | Integer |   True   | Workedshift ID |
+
 #### Response structure
 
 | Field |  Type   | Required |  Description   |
@@ -28,6 +34,12 @@ Example response
 ### POST /workedshift
 
 Create a workedshift for a fundraiser
+
+#### Body Request structure
+
+| Field |  Type   | Required |  Description   |
+| ----- | :-----: | :------: | :------------: |
+| id    | Integer |   True   | Workedshift ID |
 
 #### Response structure
 
