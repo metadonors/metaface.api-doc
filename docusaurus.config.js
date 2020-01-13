@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Metaface API',
+  title: 'Metaface for Developers',
   tagline: 'Access your Face2Face platform APIs',
   url: 'https://stupefied-meitner-bdd174.netlify.com/',
   baseUrl: '/',
@@ -8,7 +8,7 @@ module.exports = {
   projectName: 'metaface.api-doc',
   themeConfig: {
     navbar: {
-      title: 'Metaface API',
+      title: 'Metaface for Developers',
       logo: {
         alt: 'Metaface',
         src: 'img/logo.png',
