@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Metaface for Developers',
-  tagline: 'Access your Face2Face platform APIs',
-  url: 'https://stupefied-meitner-bdd174.netlify.com/',
+  tagline: 'Integrate your Face2Face platform',
+  url: 'https://developers.metaface.io/',
   baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'metadonors',
@@ -13,7 +13,7 @@ module.exports = {
         alt: 'Metaface',
         src: 'img/logo.png',
       },
-      links: [
+      items: [
         {to: 'docs/overview', label: 'Docs', position: 'left'}
       ],
     },

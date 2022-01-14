@@ -10,7 +10,7 @@ manage staff worked shifts and download your signups in batchs.
 
 Here are a few things to know before you start.
 
-* The REST architectural style is an integral part of API. To learn more about REST, check out some [RESTful documentation]()
+* The REST architectural style is an integral part of API. To learn more about REST, check out some RESTful documentation
 
 ## API Base endpoint 
 
