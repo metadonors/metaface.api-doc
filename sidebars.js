@@ -8,7 +8,7 @@
 module.exports = {
   someSidebar: {
     Introduction: ["overview", "authentication"],
-    Guides: ["understanding_signups"],
+    Guides: ["understanding_signups", "widget"],
     Reference: ["signups", "teams", "locations", "trackings", "workedshifts"],
   },
 }
