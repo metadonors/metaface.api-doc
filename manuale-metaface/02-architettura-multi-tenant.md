@@ -20,7 +20,7 @@ Preferire sempre `/api/v3/` per l'API applicativa: è la versione usata realment
 
 ## Come si identifica l'istanza di un cliente
 
-Il tenant è determinato **dall'host**, non da un campo utente né da un header applicativo: ogni cliente Metadonors ha un proprio sottodominio (`<cliente>.metaface.it`, es. `arca.metaface.it`) che corrisponde a un'istanza e a un database separati. Non esiste alcun endpoint che elenchi i clienti disponibili o permetta di cambiare tenant a runtime: un client software che deve lavorare su più clienti tratta l'host come parametro di configurazione esterno (variabile d'ambiente, file di configurazione), non come un dato scopribile dall'API.
+Il tenant è determinato **dall'host**, non da un campo utente né da un header applicativo: ogni cliente Metadonors ha un proprio sottodominio (`<cliente>.metaface.it`, es. `<cliente>.metaface.it`) che corrisponde a un'istanza e a un database separati. Non esiste alcun endpoint che elenchi i clienti disponibili o permetta di cambiare tenant a runtime: un client software che deve lavorare su più clienti tratta l'host come parametro di configurazione esterno (variabile d'ambiente, file di configurazione), non come un dato scopribile dall'API.
 
 Lo stesso principio vale per Donodoo, con una differenza pratica: lì il tenant è determinato dalla combinazione di host (`<cliente>.donodoo.it`) **e** nome del database Odoo, che non segue una convenzione automatica dedotta dal sottodominio — va richiesto a chi ha eseguito il provisioning dell'istanza.
 

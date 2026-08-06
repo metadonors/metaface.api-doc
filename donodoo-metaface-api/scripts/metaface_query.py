@@ -5,7 +5,7 @@ Nessun comando di scrittura e' implementato in questo script, per scelta:
 la skill donodoo-metaface-api e' read-only e deve restare tale.
 
 Variabili d'ambiente richieste:
-  METAFACE_URL       es. https://arca.metaface.it
+  METAFACE_URL       es. https://<cliente>.metaface.it
   METAFACE_TOKEN     token DRF (Authorization: Token <...>)
 oppure, se non si ha ancora un token:
   METAFACE_USER, METAFACE_PASSWORD  (lo script fa POST /api/v3/auth/token/ per ottenerne uno)
@@ -34,7 +34,7 @@ def env_or_die(name, hint):
 
 
 def get_base_url():
-    url = env_or_die("METAFACE_URL", "Esempio: export METAFACE_URL=https://arca.metaface.it")
+    url = env_or_die("METAFACE_URL", "Esempio: export METAFACE_URL=https://<cliente>.metaface.it")
     return url.rstrip("/")
 
 
@@ -161,7 +161,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Query di sola lettura sull'API Metaface v3. "
         "Configurazione via env: METAFACE_URL, METAFACE_TOKEN (o METAFACE_USER/METAFACE_PASSWORD).",
-        epilog="Esempio: METAFACE_URL=https://arca.metaface.it METAFACE_TOKEN=... "
+        epilog="Esempio: METAFACE_URL=https://<cliente>.metaface.it METAFACE_TOKEN=... "
         "python3 metaface_query.py sheets --mandate_date_gte 2026-06-01 --mandate_date_lte 2026-06-30",
     )
     parser.add_argument("command", choices=sorted(COMMANDS.keys()), help="Cosa interrogare")

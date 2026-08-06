@@ -6,7 +6,7 @@ Questo manuale documenta l'API REST del backend Metaface per chi deve integrarsi
 
 ## Cosa copre questo manuale
 
-Ricostruito dal codice sorgente dei repository `metadonors/metaface` (backend), `metadonors/metaface-mobile` (app tablet realmente in uso) e `metadonors/donodoo` (per la parte di modello dati Odoo coinvolta dall'integrazione), verificato per quanto possibile contro l'istanza live di un cliente reale (Arca). Data di ricognizione: 6 agosto 2026.
+Ricostruito dal codice sorgente dei repository `metadonors/metaface` (backend), `metadonors/metaface-mobile` (app tablet realmente in uso) e `metadonors/donodoo` (per la parte di modello dati Odoo coinvolta dall'integrazione), verificato per quanto possibile contro l.istanza live di un cliente reale (nome omesso in questo documento). Data di ricognizione: 6 agosto 2026.
 
 Nota su `metadonors/metaface-app`: esiste anche questo repository, ma al momento della ricognizione contiene solo lo scheletro predefinito di un progetto Expo mai avviato (nessuna logica applicativa). Non è l'app usata sul campo — l'app reale è `metaface-mobile`, React Native puro. Questo manuale ignora `metaface-app`.
 

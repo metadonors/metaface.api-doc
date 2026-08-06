@@ -6,8 +6,8 @@ la skill donodoo-metaface-api e' read-only e deve restare tale. Non aggiungere
 create/write/unlink qui senza una richiesta esplicita e separata dell'utente.
 
 Variabili d'ambiente richieste:
-  DONODOO_URL       es. https://arca.donodoo.it
-  DONODOO_DB        nome del database Odoo (es. donodoo_arca) - non e' deducibile
+  DONODOO_URL       es. https://<cliente>.donodoo.it
+  DONODOO_DB        nome del database Odoo (es. <db_odoo_cliente>) - non e' deducibile
                      per convenzione, va richiesto a chi ha fatto il provisioning
   DONODOO_USER      login Odoo (es. read-only-api)
   DONODOO_API_KEY   password o API key Odoo (intercambiabili per l'autenticazione)
@@ -51,8 +51,8 @@ def env_or_die(name, hint):
 
 
 def get_config():
-    url = env_or_die("DONODOO_URL", "Esempio: export DONODOO_URL=https://arca.donodoo.it").rstrip("/")
-    db = env_or_die("DONODOO_DB", "Esempio: export DONODOO_DB=donodoo_arca (richiedilo a chi ha fatto il provisioning)")
+    url = env_or_die("DONODOO_URL", "Esempio: export DONODOO_URL=https://<cliente>.donodoo.it").rstrip("/")
+    db = env_or_die("DONODOO_DB", "Esempio: export DONODOO_DB=<db_odoo_cliente> (richiedilo a chi ha fatto il provisioning)")
     user = env_or_die("DONODOO_USER", "Esempio: export DONODOO_USER=read-only-api")
     key = env_or_die("DONODOO_API_KEY", "Esempio: export DONODOO_API_KEY=<api key o password>")
     return url, db, user, key

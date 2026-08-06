@@ -26,7 +26,7 @@ Metodi principali: `search`, `search_count`, `search_read`, `read`, `create`, `w
 
 ## Nome del database
 
-Non è deducibile a priori dal sottodominio: per il cliente Arca il database confermato (risponde senza errore "database does not exist") è `donodoo_arca`. Se si aggiunge un nuovo cliente, il nome del database va richiesto a chi ha fatto il provisioning, non assunto per convenzione.
+Non è deducibile a priori dal sottodominio: per un cliente specifico, il database confermato (risponde senza errore "database does not exist") è `<db_odoo_cliente>`. Se si aggiunge un nuovo cliente, il nome del database va richiesto a chi ha fatto il provisioning, non assunto per convenzione.
 
 ## Modelli fundraising rilevanti (moduli custom `ngo_*`, non standard Odoo)
 

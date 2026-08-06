@@ -8,7 +8,7 @@ Obiettivo: tutte le adesioni con data mandato in un intervallo, per un team spec
 
 ```bash
 TOKEN="9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
-BASE="https://arca.metaface.it/api/v3"
+BASE="https://<cliente>.metaface.it/api/v3"
 
 # 1. Trova l'id del team (nome esatto o via ricerca manuale sull'elenco)
 curl -s "$BASE/teams/" -H "Authorization: Token $TOKEN" | python3 -c "
@@ -32,7 +32,7 @@ print(f\"{len(milano)} adesioni per il team Milano nel periodo\")
 Con lo script della skill, lo stesso risultato in una riga (il filtro per team va comunque fatto lato client, lo script non lo fa per te):
 
 ```bash
-METAFACE_URL=https://arca.metaface.it METAFACE_TOKEN=$TOKEN \
+METAFACE_URL=https://<cliente>.metaface.it METAFACE_TOKEN=$TOKEN \
   python3 scripts/metaface_query.py sheets --mandate_date_gte 2026-06-01 --mandate_date_lte 2026-06-30 --json \
   | python3 -c "import json,sys; print(len([s for s in json.load(sys.stdin) if s['team']==4]))"
 ```
@@ -95,7 +95,7 @@ Nota: 'firmata' qui è definita come `checkpoint_date` presente — verificare c
 ## 4. Verificare la configurazione di un widget pubblico prima di pubblicarlo
 
 ```bash
-curl -s https://arca.metaface.it/api/widget/v2/ping/abc123token | python3 -m json.tool
+curl -s https://<cliente>.metaface.it/api/widget/v2/ping/abc123token | python3 -m json.tool
 ```
 
 Controlla che `options.payment.methods` contenga i metodi di pagamento attesi e che `options.currency` sia quella corretta, prima di dare l'ok alla pubblicazione del widget su un sito cliente.

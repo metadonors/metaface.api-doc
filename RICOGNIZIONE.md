@@ -7,7 +7,7 @@ Documento di ricognizione tecnica, prodotto ricostruendo il codice sorgente dei 
 - `metadonors/metaface-app` — **scheletro Expo mai avviato** (solo `App.tsx` di default, nessuna logica). Non è l'app in produzione: ignorato nel resto della ricognizione.
 - `metadonors/donodoo` — CRM Odoo 14, per la parte di modello dati custom fundraising (`addons/ngo_addons/*`) coinvolta dall'integrazione.
 
-Verifica live eseguita contro `arca.metaface.it` (credenziali di test read-only fornite dall'utente) e contro `arca.donodoo.it` (verifica parziale: solo la versione del server, login non riuscito — vedi sezione dedicata).
+Verifica live eseguita contro `<cliente>.metaface.it` (credenziali di test read-only fornite dall'utente) e contro `<cliente>.donodoo.it` (verifica parziale: solo la versione del server, login non riuscito — vedi sezione dedicata).
 
 Data ricognizione: 6 agosto 2026.
 
@@ -21,7 +21,7 @@ Data ricognizione: 6 agosto 2026.
 | Async | Celery 4.1.1 + `django_celery_beat` (scheduler DB-based) | `requirements.txt`, `docker/entrypoint.sh:64,68` |
 | Realtime | Django Channels (`channels_redis`) | `settings.py:386-395` |
 | App tablet | React Native puro (non Expo), Odoo/Metaface non centrale qui | `metaface-mobile/package.json` |
-| Odoo/Donodoo collegato | **14.0-20231106** confermato live (`xmlrpc/2/common.version()` su `arca.donodoo.it`) — coincide con quanto riportato nel brief iniziale | verifica live |
+| Odoo/Donodoo collegato | **14.0-20231106** confermato live (`xmlrpc/2/common.version()` su `<cliente>.donodoo.it`) — coincide con quanto riportato nel brief iniziale | verifica live |
 
 ## 2. Albero delle rotte (ROOT_URLCONF)
 
@@ -61,17 +61,17 @@ v2: `ping/{token}`, `donor/`, `donation/`, `confirm/`, `stripe/create_intent/`, 
 ## 4. Punti DA VERIFICARE (con la domanda precisa da girare a chi ha scritto il codice)
 
 1. **`sale.subscription` vs `ngo.subscription`** (priorità alta): `libs/donodoo/donodoo.py:36` usa `_obj = 'sale.subscription'` per la classe `SubscriptionsResource`, ma il modello Odoo reale usato dal modulo fundraising per le adesioni ricorrenti è `ngo.subscription` (`addons/ngo_addons/ngo_payment/models/ngo_subscription.py:56`). `sale.subscription` esiste in Donodoo solo come modulo Enterprise standard, scollegato dal flusso fundraising. **Domanda**: il codice Metaface chiama davvero la stringa `"sale.subscription"` via RPC? Se sì, cosa succede in pratica quando `donodoo_sync_jobs`/`odoo_sync_jobs` tenta di leggere `subscription.code` dopo il completamento di un job — e perché non è mai stato notato (le eccezioni in quel punto sono solo loggate in debug, non sollevate)?
-2. **Frequenza di sincronizzazione Metaface→Donodoo**: il task `donodoo_sync_jobs` non è nel `beat_schedule` statico di `metaface/celery.py`. Con `django_celery_beat`/`DatabaseScheduler` attivo, la schedulazione (se esiste) vive nella tabella `django_celery_beat_periodictask` del DB di produzione. **Domanda**: con quale frequenza viene eseguito realmente `odoo_sync_jobs` per il cliente Arca (e per gli altri clienti attivi)? È un cron esterno o una periodic task DB?
+2. **Frequenza di sincronizzazione Metaface→Donodoo**: il task `donodoo_sync_jobs` non è nel `beat_schedule` statico di `metaface/celery.py`. Con `django_celery_beat`/`DatabaseScheduler` attivo, la schedulazione (se esiste) vive nella tabella `django_celery_beat_periodictask` del DB di produzione. **Domanda**: con quale frequenza viene eseguito realmente `odoo_sync_jobs` per i clienti attivi? È un cron esterno o una periodic task DB?
 3. **Task celery `send_sheet_to_donodoo` mai invocato**: definito in `integrations/donodoo/tasks.py:10-23` ma le chiamate a `.delay()`/diretta sono commentate in `integrations/donodoo/models.py:449-450`; oggi la creazione del job Donodoo è **sincrona** nel ciclo di cambio stato della sheet. **Domanda**: è un fix intenzionale (per gestire meglio gli errori sincroni) o un refactor incompleto? Impatta le prestazioni percepite dall'utente se Donodoo è lento.
 4. **Configurazione multi-server/trigger Donodoo effettiva**: `DonodooServer`/`DonodooTrigger` sono record DB, non deducibili dal codice. **Domanda**: quanti server e trigger sono configurati oggi, per quali progetti/clienti, con quali stati di successo/fallimento?
 5. **`SheetProject.checkpoint_state`/`fail_state`/`contact_state`** (`sheet/models/common.py:90-92`): definiti sul modello ma non risultano letti a runtime in nessun punto trovato oltre alla loro definizione. **Domanda**: sono dead code residuo o letti da una vista non coperta in questa ricognizione (es. form di configurazione admin)?
-6. **Etichette testuali reali degli stati di workflow** (`State.label`) usate da ciascun cliente per "firmata"/"attivata"/"annullata": sono dati di configurazione per progetto, non fixture. **Domanda**: per il cliente Arca, quali sono gli state label esatti che corrispondono a questi tre concetti?
+6. **Etichette testuali reali degli stati di workflow** (`State.label`) usate da ciascun cliente per "firmata"/"attivata"/"annullata": sono dati di configurazione per progetto, non fixture. **Domanda**: per un cliente specifico, quali sono gli state label esatti che corrispondono a questi tre concetti?
 7. **Differenza semantica `Team.leader` vs `Team.team_leader`**: due FK distinte senza commenti che ne chiariscano l'uso differenziato (`team/models.py:926,928`). **Domanda**: qual è la differenza operativa tra i due ruoli?
 8. **`TeamOfficer` (appartenenza team come backofficer) vs permesso Django `sheet.add_as_another_user`** (usato da `Staff.is_backofficer()`): non risulta un meccanismo di sincronizzazione automatica tra i due. **Domanda**: un utente aggiunto a `TeamOfficer` riceve automaticamente questo permesso, o sono gestiti indipendentemente (rischio di incoerenza)?
 9. **`stripe_*`/`paypal_*` come chiavi di `ngo.job`**: il codice Metaface (`integrations/donodoo/models.py`, metodi `_prepare_job_donation_vals`/`_prepare_job_subscription_vals`) prepara chiavi come `stripe_intent_id`, `paypal_token` ecc. per il dizionario passato a `odoo.jobs.create(vals)`, ma questi campi **non esistono** sul modello `ngo.job` in nessun modulo Donodoo grepato. **Domanda**: queste chiavi vengono davvero inviate? Se sì, come le gestisce Odoo (silenziosamente ignorate, o causano errore)?
 10. **`TriggerRegistry.trigger_type`** (`registry/models.py:148`) elenca solo `[('redmine','Redmine')]`, mentre esistono trigger concreti per Donodoo/webhook/payments/mf/directchannel. **Domanda**: questi trigger passano realmente dal registry (con l'enum da estendere) o restano sottoclassi Python indipendenti, rendendo l'enum incompleto per design?
 
-## 5. Divergenze codice vs istanza live (Arca)
+## 5. Divergenze codice vs istanza live
 
 | Cosa | Dal codice | Dal live | |
 |---|---|---|---|
@@ -79,11 +79,11 @@ v2: `ping/{token}`, `donor/`, `donation/`, `confirm/`, `stripe/create_intent/`, 
 | `GET /api/v3/reports/?year=2026` | Nel codice sembrava un percorso valido (branch "solo anno") | **Fallisce anche con `year` valorizzato**, stessa pagina di errore HTML/200 | L'endpoint risulta rotto anche nel caso "documentato" come funzionante — non affidabile in questa versione live |
 | Paginazione `/api/v3/sheets/` | `LimitOffsetPagination` dichiarata nel codice | Confermata: `{"count","next","previous","results"}` | Nessuna divergenza |
 | `GET /api/v2/ping/` | `View` semplice, nessuna auth, solo `{"status":"OK"}` | Confermato | Nessuna divergenza |
-| `GET /api/v3/ping/` | Espone `customer.name/localization/currency`, `valid_token` | Confermato (`"customer": "Arca", "localization": "it", "currency": "€"`) | Nessuna divergenza |
+| `GET /api/v3/ping/` | Espone `customer.name/localization/currency`, `valid_token` | Confermato (`"customer": "<nome cliente>", "localization": "it", "currency": "€"`) | Nessuna divergenza |
 | Versione Odoo/Donodoo collegata | Attesa 14.x per compatibilità con `odoorpc` | Confermata **14.0-20231106** | Nessuna divergenza |
 | Isolamento company su `teams/locations/campaigns/trackings/workedshifts` | Filtro per company/staff dell'utente | Confermato indirettamente: l'utente di test (senza company associata) riceve array vuoti su tutti questi endpoint | Nessuna divergenza, ma nota bene per capire risposte vuote in test |
 
-**Verifica Donodoo — parziale**: confermata solo la versione del server (14.0-20231106, via `xmlrpc/2/common`) e il nome del database (`donodoo_arca`, risponde senza errore "database does not exist"). Il login con le credenziali fornite (`read-only-api` + chiave) restituisce `uid=False` (credenziali non valide per quel database) — non è stato possibile completare la verifica sui modelli `ngo.donor`/`ngo.job`/`ngo.subscription` lato Donodoo. **Nessuna scrittura o cancellazione è stata tentata su nessuna delle due istanze.**
+**Verifica Donodoo — parziale**: confermata solo la versione del server (14.0-20231106, via `xmlrpc/2/common`) e il nome del database (`<db_odoo_cliente>`, risponde senza errore "database does not exist"). Il login con le credenziali fornite (`read-only-api` + chiave) restituisce `uid=False` (credenziali non valide per quel database) — non è stato possibile completare la verifica sui modelli `ngo.donor`/`ngo.job`/`ngo.subscription` lato Donodoo. **Nessuna scrittura o cancellazione è stata tentata su nessuna delle due istanze.**
 
 ## 6. Nota sull'assunzione iniziale del brief
 

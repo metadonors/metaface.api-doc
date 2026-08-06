@@ -40,7 +40,7 @@ Se una variabile manca, gli script si fermano con un messaggio che spiega cosa i
 
 ## Multi-cliente per costruzione
 
-`arca` è il primo cliente configurato, non l'unico supportato. L'istanza (host Metaface, host+database Donodoo) arriva sempre dalla configurazione (variabili d'ambiente), non è scritta nel codice degli script né in questi file. **Per aggiungere un cliente nuovo**: basta impostare le stesse variabili d'ambiente puntando all'host/database del nuovo cliente — nessuna modifica agli script o ai file di riferimento è necessaria.
+Il primo cliente configurato non è l'unico supportato. L'istanza (host Metaface, host+database Donodoo) arriva sempre dalla configurazione (variabili d'ambiente), non è scritta nel codice degli script né in questi file. **Per aggiungere un cliente nuovo**: basta impostare le stesse variabili d'ambiente puntando all'host/database del nuovo cliente — nessuna modifica agli script o ai file di riferimento è necessaria.
 
 ## Come rispondere a una domanda
 

@@ -1,6 +1,6 @@
 # Metaface API — riferimento denso (v3 preferita, v2 legacy)
 
-Fonte: ricognizione codice `metadonors/metaface` (6 ago 2026) + verifica live `arca.metaface.it`. Ogni endpoint richiede `Authorization: Token <token>` salvo indicato. Base URL: `https://<cliente>.metaface.it`.
+Fonte: ricognizione codice `metadonors/metaface` (6 ago 2026) + verifica live `<cliente>.metaface.it`. Ogni endpoint richiede `Authorization: Token <token>` salvo indicato. Base URL: `https://<cliente>.metaface.it`.
 
 ## Autenticazione
 

@@ -22,11 +22,11 @@ Una pagina onesta vale più di dieci pagine ottimistiche: qui è raccolto tutto 
 - `mobilehelp/`, `backups/` — contengono dump di log/database locale dell'app tablet, non dati di business.
 - `credit_card_check/` — verifica interna al flusso di raccolta, non pensata per un uso indipendente.
 
-## Divergenze osservate tra codice e istanza live (cliente Arca)
+## Divergenze osservate tra codice e istanza live
 
 - `GET /api/v3/reports/` è risultato **più rotto** di quanto suggerisse la sola lettura del codice: nel codice il bug sembrava limitato al caso "nessun parametro passato", ma in produzione fallisce anche passando `year` valorizzato.
 - Tutto il resto verificato (paginazione di `sheets`, forma di `ping`/`users/me`, isolamento per company, versione Odoo `14.0-20231106`) corrisponde a quanto risultava dal codice — nessun'altra divergenza rilevata nella finestra di verifica eseguita.
-- La verifica lato Donodoo è rimasta parziale: confermata solo la versione del server e il nome del database (`donodoo_arca`); il login con le credenziali fornite non è riuscito (credenziali non valide per quel database, non un problema di rete o di configurazione del client).
+- La verifica lato Donodoo è rimasta parziale: confermata solo la versione del server e il nome del database (`<db_odoo_cliente>`); il login con le credenziali fornite non è riuscito (credenziali non valide per quel database, non un problema di rete o di configurazione del client).
 
 ## Punti apertI sul modello dati
 
